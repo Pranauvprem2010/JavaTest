@@ -9,10 +9,12 @@ public class Q6_Tricky {
         Integer a = 127;
         Integer b = 127;
         System.out.println("1: " + (a == b));
+        //Output: 1: true
 
         Integer c = 128;
         Integer d = 128;
         System.out.println("2: " + (c == d));
+        //Output: 2: true
 
         // Q6b: String interning
         String s1 = "frc";
@@ -21,6 +23,10 @@ public class Q6_Tricky {
         System.out.println("3: " + (s1 == s2));
         System.out.println("4: " + (s1 == s3));
         System.out.println("5: " + s1.equals(s3));
+        //Output:
+        //3: true
+        //4: false
+        //5: true
 
         // Q6c: null unboxing
         try {
@@ -30,6 +36,7 @@ public class Q6_Tricky {
         } catch (Exception ex) {
             System.out.println("6: " + ex.getClass().getSimpleName());
         }
+        //Output: 6: NullPointerException
 
         // ── WRITE ──
         // 1) Implement safeEquals that:
@@ -56,24 +63,37 @@ public class Q6_Tricky {
         // 3) Without running it: what does this print? Write your answer
         //    as a comment, then uncomment to verify.
         //
-        // Integer x = 0;
-        // for (int i = 0; i < 5; i++) {
-        //     x = x + 1;    // how many Integer objects does this create total?
-        // }
-        // System.out.println(x);
-        // System.out.println(x == Integer.valueOf(5));
-        // System.out.println(x == new Integer(5));
+        Integer x = 0;
+        for (int i = 0; i < 5; i++) {
+            x = x + 1;    // how many Integer objects does this create total?
+        }
+        System.out.println(x);
+        System.out.println(x == Integer.valueOf(5));
+        System.out.println(x == new Integer(5));
+        // Output:
+        // 5
+        // true
+        // false
     }
 
     // TODO
     static boolean safeEquals(Object a, Object b) {
-        // your code here
-        return false;
+        if (a == null && b == null) {
+            return true;
+        }
+
+        if (a == null || b == null) {
+            return false;
+        }
+
+        return a.equals(b);
     }
 
     // TODO
     static int safeUnbox(Integer val, int defaultVal) {
-        // your code here
-        return 0;
+        if (val == null) {
+            return defaultVal;
+        }
+        return val;
     }
 }
