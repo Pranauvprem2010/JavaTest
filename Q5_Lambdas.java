@@ -12,8 +12,10 @@ public class Q5_Lambdas {
         int multiplier = 3;
         IntUnaryOperator triple = x -> x * multiplier;
         System.out.println("1: " + triple.applyAsInt(7));
+        //Output: 1: 21
         // Q: if you uncomment the next line, does it compile? why?
         // multiplier = 4;
+        // no, it does not compile becuase a varibale used inside lambda cannot be reassigned later so it must be final
 
         Runnable[] tasks = new Runnable[3];
         for (int i = 0; i < 3; i++) {
@@ -23,12 +25,15 @@ public class Q5_Lambdas {
         System.out.print("2: ");
         for (Runnable r : tasks) r.run();
         System.out.println();
-
+        //Output: 2: 012
+   
         // Q: what if you removed "final" from idx? does it still compile?
+        //yes becuase idx is never reassigned
 
         List<String> motors = Arrays.asList("Falcon", "Neo", "Kraken", "Vortex");
         motors.sort((a, b) -> a.length() - b.length());
         System.out.println("3: " + motors);
+        //Output: 3: [Neo, Falcon, Vortex, Kraken]
 
         // ── WRITE ──
         // 1) Write a method "applyToAll" that takes a List<Integer> and a
